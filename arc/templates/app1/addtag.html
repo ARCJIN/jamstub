@@ -1,0 +1,220 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}{% load static %} <link rel="stylesheet" href={% static 'css/addpost.css' %}>
+
+    {% if user == None %}
+      Login to view this page
+    {% else %}
+
+      {% if user.is_editor %}
+
+
+
+
+      <header class="dook">
+        <br><br>
+        <form  method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+          <p>{{msg}}</p>
+          <p>Enter the name of Search Tag to be made for better search</p>
+
+<input type="text" placeholder="Enter Tag to be made.." name="text" value="">
+<style>
+.switch {
+position: relative;
+display: inline-block;
+width: 120px;
+height: 34px;
+}
+
+.switch input {
+opacity: 0;
+width: 0;
+height: 0;
+}
+
+.sliderm {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.sliderm:before{
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color:#cfdcff;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.sliderf {
+position: absolute;
+cursor: pointer;
+top: 0;
+left: 0;
+right: 0;
+bottom: 0;
+background-color: #ccc;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+.sliderf:before{
+position: absolute;
+content: "";
+height: 26px;
+width: 26px;
+left: 4px;
+bottom: 4px;
+background-color: #f9ccff;
+-webkit-transition: .4s;
+transition: .4s;
+}
+
+
+input:checked +   #m{
+background-color: #2196F3;
+}
+input:checked + #f{
+background-color: #fa4bc0;
+}
+
+input:focus + .sliderm {
+box-shadow: 0 0 1px #2196F3;
+}
+
+
+input:focus + .sliderf {
+box-shadow: 0 0 1px #2196F3;
+}
+
+
+input:checked + .sliderm:before {
+-webkit-transform: translateX(100px);
+-ms-transform: translateX(100px);
+transform: translateX(100px);
+}
+
+input:checked + .sliderf:before {
+-webkit-transform: translateX(100px);
+-ms-transform: translateX(100px);
+transform: translateX(100px);
+}
+
+/* Rounded sliders */
+.sliderm.round {
+border-radius: 34px;
+}
+
+.sliderm.round:before {
+border-radius: 50%;
+}
+.sliderf.round {
+border-radius: 34px;
+}
+
+.sliderf.round:before {
+border-radius: 50%;
+}
+</style>
+
+
+<br><br>
+<hr><br>
+
+
+Topics:<br>
+<label class="switch">
+<input type="radio" name="gender" value="Genre">
+<span class="sliderf round"id="f">Genre</span>
+</label>
+
+
+<label class="switch">
+<input type="radio" name="gender" value="Category">
+<span class="sliderf round" id="f">Category</span>
+</label>
+
+<label class="switch">
+<input type="radio" name="gender" value="Positions">
+<span class="sliderf round"id="f">Activity</span>
+</label>
+
+
+<label class="switch">
+<input type="radio" name="gender" value="Company">
+<span class="sliderf round" id="f">Orgs</span>
+</label>
+
+<label class="switch">
+<input type="radio" name="gender" value="Actors">
+<span class="sliderf round"id="f">Top Leads</span>
+</label>
+
+
+<label class="switch">
+<input type="radio" name="gender" value="Location">
+<span class="sliderf round" id="f">Locations</span>
+</label>
+
+<script type="text/javascript">
+$('div.checkbox-group.required :checkbox:checked').length > 0
+</script>
+  <br>
+  <button type="submit" class="btn">Upload</button>
+
+  </form>
+      </header>
+
+<br><br><br>
+
+
+
+
+
+
+
+
+
+      {% else %}
+      You are not authorized to view this page
+      {% endif %}
+
+
+
+
+        {% endif %}
+
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('form input').change(function () {
+              $('form p').text(this.files.length + " file(s) selected");
+            });
+          });
+        </script>
+
+        <script type="text/javascript">
+          $('#chooseFile').bind('change', function () {
+            var filename = $("#chooseFile").val();
+            if (/^\s*$/.test(filename)) {
+              $(".file-upload").removeClass('active');
+              $("#noFile").text("No file chosen...");
+            }
+            else {
+              $(".file-upload").addClass('active');
+              $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            }
+          });
+
+        </script>
+    {% endblock %}

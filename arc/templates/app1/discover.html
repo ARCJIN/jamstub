@@ -1,0 +1,46 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}{% load static %}<link rel="stylesheet" href={% static 'css/strucprofile.css' %}>
+    {% if user == None %}
+
+    {% else %}
+
+
+
+
+
+
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700" rel="stylesheet">
+
+    <section class="hero-section">
+      <div class="card-grid">
+          {% for post in posts %}
+        <a class="card" href={% url 'postdetail' pk=post.id %}>
+          
+          <div class="card__background" style="background-image: url({{post.imagefile.url}})"></div>
+
+        </a>
+
+        {% endfor %}
+      <div>
+    </section>
+
+
+
+
+<br>
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% endif %}
+
+{% endblock %}
