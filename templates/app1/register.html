@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {% load static%}
+    <title></title>  <link rel="stylesheet" href={% static 'css/instaregister.css' %}><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  </head>
+  <body>
+    {% if is_visited or is_redirected %}
+    <form class="form" name="register" method="POST">
+      {% csrf_token %}
+      <h4>{{msg}}</h4>
+    <h2>JOIN-NOW</h2>
+
+    <p type="*Username:"><input name="username"  placeholder="Write your username here.." required></input></p>
+    <p type="*Password:"><input name="password" type="password" placeholder="Enter your password here..." required></input></p>
+    <p type="*Confirm Password:"><input type="password" name="cpassword" placeholder="Recheck your password.." required></input></p>
+    <p type="Desc:"><input name="desc"  placeholder="What would you like to tell about yourself.."></input></p>
+    <p type="Email"><input name="email" type="email" placeholder="Enter your email id"></input></p>
+
+
+        <style>
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 60px;
+      height: 34px;
+    }
+
+    .switch input {
+      opacity: 0;
+      width: 0;
+      height: 0;
+    }
+
+    .sliderm {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .sliderm:before{
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color:#cfdcff;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .sliderf {
+      position: absolute;
+      cursor: pointer;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #ccc;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+    .sliderf:before{
+      position: absolute;
+      content: "";
+      height: 26px;
+      width: 26px;
+      left: 4px;
+      bottom: 4px;
+      background-color: #f9ccff;
+      -webkit-transition: .4s;
+      transition: .4s;
+    }
+
+
+    input:checked +   #m{
+      background-color: #2196F3;
+    }
+    input:checked + #f{
+      background-color: #fa4bc0;
+    }
+
+    input:focus + .sliderm {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+
+    input:focus + .sliderf {
+      box-shadow: 0 0 1px #2196F3;
+    }
+
+
+    input:checked + .sliderm:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    input:checked + .sliderf:before {
+      -webkit-transform: translateX(26px);
+      -ms-transform: translateX(26px);
+      transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .sliderm.round {
+      border-radius: 34px;
+    }
+
+    .sliderm.round:before {
+      border-radius: 50%;
+    }
+    .sliderf.round {
+      border-radius: 34px;
+    }
+
+    .sliderf.round:before {
+      border-radius: 50%;
+    }
+    </style>
+
+
+    <br><br>
+
+
+
+    Gender:<br>
+    <label class="switch">
+      <input type="radio" name="gender" value="MALE">
+      <span class="sliderm round"id="m"></span>
+    </label>
+
+
+    <label class="switch">
+    <input type="radio" name="gender" value="fEMALE">
+      <span class="sliderf round" id="f"></span>
+    </label>
+
+    <hr><br>
+    Interested:<br>
+    <label class="switch">
+    <input type="radio" name="interested" value="MALE">
+      <span class="sliderm round" id="m"></span>
+    </label>
+
+
+    <label class="switch">
+    <input type="radio" name="interested" value="FEMALE">
+      <span class="sliderf round" id="f"></span>
+    </label>
+    <br>
+
+
+<script type="text/javascript">
+   $('div.checkbox-group.required :checkbox:checked').length > 0
+ </script>
+
+        <br><br>
+
+
+    <button type="submit" name="wantregister" >Make Account</button>
+  <br><br>
+  </form>
+<br><br>
+
+{% else %}
+
+<h4>You are not authorized to register on the app</h4>
+<br>
+Go to the Login Page: <a href={% url 'customer_login' %}>Login </a>
+{% endif %}
+
+
+
+  </body>
+</html>

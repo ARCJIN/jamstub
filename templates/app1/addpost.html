@@ -1,0 +1,262 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}{% load static %} <link rel="stylesheet" href={% static 'css/instaaddpost.css' %}>
+
+    {% if user == None %}
+      Login to view this page
+    {% else %}
+
+      {% if user.is_editor %}
+
+      <br>
+
+      <header class="dook">
+        <br><br>
+        <form  method="POST" enctype="multipart/form-data">
+          <style>
+      .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+      }
+
+      .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+      }
+
+      .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+      }
+
+      input:checked +   #m{
+        background-color: #000000;
+      }
+      input:checked + #f{
+        background-color: #fa4bc0;
+      }
+
+      input:focus + .slider {
+        box-shadow: 0 0 1px #2196F3;
+      }
+
+      input:checked + .slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+      }
+
+      /* Rounded sliders */
+      .slider.round {
+        border-radius: 34px;
+      }
+
+      .slider.round:before {
+        border-radius: 50%;
+      }
+      </style>
+
+
+      <br><br>
+          {% csrf_token %}
+          <br>
+          <script type="text/javascript" src="//code.jquery.com/jquery-1.10.2.min.js"></script>
+
+          {{msg}}
+
+      <div class="file-upload">
+        <div class="file-select">
+
+
+          <input type="file" id="real-file" class="btn" name="chooseFile" hidden="hidden" />
+
+    <button class="file-select-button" type="button" id="custom-button">Add Video</button>
+    <span id="custom-text"></span>
+
+          <input type="file" name="chooseFile" class="btn">
+        </div>
+      </div>
+      <div class="file-upload">
+        <div class="file-select">
+          <input type="file" id="real-file" class="btn" name="chooseFile" hidden="hidden" />
+
+          <button class="file-select-button" type="button" id="custom-button">Add Image</button>
+          <span id="custom-text"></span>
+          <input type="file" name="Filechoose" class="btn">
+        </div>
+      </div>
+
+
+
+<textarea required id="itext" name="desc" placeholder="Add Description" class="form-control"  type="text" rows="7" cols="50"></textarea><br>
+ <button type="submit" class="btn">Upload</button>
+  <br>
+
+
+
+
+      </header>
+
+
+
+  <section class="links">
+    <div class="links-inner">
+      <ul>
+        <li><h3>Company</h3></li>
+        {% for locatio in companyair %}
+
+
+
+
+          {{locatio.tagtext}}<br>
+          <label class="switch">
+            <input type="radio" name="companys"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+
+<br>
+        {% endfor %}
+      </ul>
+      <ul>
+
+        <li><h3>Actors</h3></li>
+        {% for locatio in actorair %}
+
+          {{locatio.tagtext}}<br>
+          <label class="switch">
+            <input type="checkbox" name="actors"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+<br>
+        {% endfor %}
+      </ul>
+      <ul>
+        <li><h3>Positions</h3></li>
+
+        {% for locatio in positionair %}
+      {{locatio.tagtext}}<br>
+          <label class="switch">
+            <input type="checkbox" name="positions"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+<br>
+        {% endfor %}
+      </ul>
+      <ul>
+        <li><h3>Genre</h3></li>
+        {% for locatio in genreair %}
+      {{locatio.tagtext}}<br>
+          <label class="switch">
+            <input type="checkbox" name="genres"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+<br>
+        {% endfor %}
+      </ul>
+      <ul>
+        <li><h3>Category</h3></li>
+        {% for locatio in categoryair %}
+      {{locatio.tagtext}}<br>
+          <label class="switch">
+            <input type="checkbox" name="categorys"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+<br>
+        {% endfor %}
+      </ul>
+      <ul>
+        <li><h3>Locations</h3></li>
+        {% for locatio in locationair %}
+        {{locatio.tagtext}}
+          <label class="switch">
+            <input type="radio" name="locations"  value={{locatio.id}}>
+            <span class="slider round"id="m"></span>
+          </label>
+<br>
+        {% endfor %}
+
+      </ul>
+    </div>
+  </section>
+
+</form>
+
+<br><br><br>
+
+
+
+
+
+
+      {% else %}
+      You are not authorized to view this page
+      {% endif %}
+
+
+
+
+        {% endif %}
+<script type="text/javascript">
+  const realFileBtn = document.getElementById("real-file");
+const customBtn = document.getElementById("custom-button");
+const customTxt = document.getElementById("custom-text");
+
+customBtn.addEventListener("click", function() {
+  realFileBtn.click();
+});
+
+realFileBtn.addEventListener("change", function() {
+  if (realFileBtn.value) {
+    customTxt.innerHTML = realFileBtn.value.match(
+      /[\/\\]([\w\d\s\.\-\(\)]+)$/
+    )[1];
+  } else {
+    customTxt.innerHTML = "No file chosen, yet.";
+  }
+});
+
+</script>
+        <script type="text/javascript">
+          $(document).ready(function(){
+            $('form input').change(function () {
+              $('form p').text(this.files.length + " file(s) selected");
+            });
+          });
+        </script>
+
+        <script type="text/javascript">
+          $('#chooseFile').bind('change', function () {
+            var filename = $("#chooseFile").val();
+            if (/^\s*$/.test(filename)) {
+              $(".file-upload").removeClass('active');
+              $("#noFile").text("No file chosen...");
+            }
+            else {
+              $(".file-upload").addClass('active');
+              $("#noFile").text(filename.replace("C:\\fakepath\\", ""));
+            }
+          });
+
+        </script>
+    {% endblock %}

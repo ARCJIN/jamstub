@@ -1,0 +1,47 @@
+{% extends 'app1/baseintro.html' %}
+{% block body_block %}{% load static %} <link rel="stylesheet/less" href={% static 'css/followrequest.css' %}>
+<script src="https://cdn.jsdelivr.net/npm/less@4.1.1" ></script>
+
+    {% if user == None %}
+
+    {% else %}
+
+
+    {% if user.is_owner %}
+
+    <div class="container">
+
+      <div class="gallery">
+        {% for request in requests %}
+          <a href={% url 'reqdetail' pk=request.id %}>
+        <div class="gallery-item" tabindex="0">
+
+        <img class="profile-picture-image" src={% static 'images/'%}{{prof_pic}} alt="Picture" height="250px" width="250px">
+
+          <div class="gallery-item-info">
+
+            <ul>
+              <li class="gallery-item-likes">Username: {{request.account.username}}</li><br>
+              <li class="gallery-item-comments">Invited By: {{request.account.invited_by.username}}</li>
+
+            </ul>
+
+          </div>
+
+        </div>
+        </a>
+        {% endfor %}
+
+        </div>
+        </div>
+
+
+{% else %}<br><br><br>
+You are permitted to visit this page
+<br><br><br>
+{% endif %}
+
+    {% endif %}
+
+
+{% endblock %}
